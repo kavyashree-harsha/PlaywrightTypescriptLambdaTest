@@ -10,10 +10,12 @@ test("Login operations for LambdaTest website", async() =>{
         const loginPage = new LoginPage(page);
         const utilitiesPage = new Utilities(page);
         //Launch website
+        let userID = process.env.userID;
+        let password = process.env.password;
         await page.goto(loginPage.url);
         await utilitiesPage.waitForPageDomLoad(page);
         //Login to the page
-        await loginPage.login("kavyashree.kestur@yahoo.com", "Testing@123");
+        await loginPage.login(userID, password);
         await utilitiesPage.waitForPageDomLoad(page);
         //Validate Home Page screen
         expect(await loginPage.homePageLayout.isVisible()).toEqual(true);
